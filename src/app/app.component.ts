@@ -16,6 +16,7 @@ export class AppComponent {
   isLoginPage = false;
   isRegisterPage = false;
   isHome = false;
+  isAdminPage = false;
 
 
 
@@ -32,6 +33,7 @@ export class AppComponent {
       this.isLoginPage = path === '/login';
       this.isRegisterPage = path === '/register';
       this.isHome = path === '/';
+      this.isAdminPage = path === '/admin';
     });
   }
 
