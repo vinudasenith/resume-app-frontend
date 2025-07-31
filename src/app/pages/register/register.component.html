@@ -8,12 +8,12 @@
 
         <!-- Form -->
         <div class="p-8">
-            <form class="space-y-5">
+            <form class="space-y-5" (ngSubmit)="handleRegister()" #registerForm="ngForm" novalidate>
                 <!-- First Name Field -->
                 <div>
                     <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                     <div class="mt-1">
-                        <input id="firstName" name="firstName" type="text" required
+                        <input id="firstName" [(ngModel)]="firstName" name="firstName" type="text" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="John">
                     </div>
@@ -23,7 +23,7 @@
                 <div>
                     <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
                     <div class="mt-1">
-                        <input id="lastName" name="lastName" type="text" required
+                        <input id="lastName" [(ngModel)]="lastName" name="lastName" type="text" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="Doe">
                     </div>
@@ -33,7 +33,7 @@
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <div class="mt-1">
-                        <input id="email" name="email" type="email" required
+                        <input id="email" [(ngModel)]="email" name="email" type="email" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="you@example.com">
                     </div>
@@ -43,7 +43,7 @@
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <div class="mt-1">
-                        <input id="username" name="username" type="text" required
+                        <input id="username" [(ngModel)]="username" name="username" type="text" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="johndoe123">
                     </div>
@@ -53,7 +53,7 @@
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <div class="mt-1">
-                        <input id="password" name="password" type="password" required
+                        <input id="password" [(ngModel)]="password" name="password" type="password" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="••••••••">
                     </div>
