@@ -1,0 +1,47 @@
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Upload Your Resume</h1>
+            <p class="text-lg text-gray-600">Get instant AI-powered feedback to improve your job matches</p>
+        </div>
+
+        <div class="mb-6 text-center">
+            <input type="email" [(ngModel)]="userEmail" placeholder="Enter your email" required
+                class="border border-gray-300 rounded-md px-3 py-2 w-full max-w-md mx-auto bg-purple-300" />
+        </div>
+
+        <!-- Upload Card -->
+        <div class="bg-white shadow rounded-lg p-6 mb-8">
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center" id="upload-area">
+                <div class="flex justify-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                        <span class="text-2xl text-purple-600">📄</span>
+                    </div>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Drag & drop your resume here</h3>
+                <p class="text-gray-500 mb-4">or</p>
+
+                <input type="file" id="resume-upload" class="hidden" accept=".pdf,.docx"
+                    (change)="onFileSelected($event)">
+                <label for="resume-upload"
+                    class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    Select File
+                </label>
+
+                <!--show selected file name-->
+                <div *ngIf="selectedFile" class="mt-4">
+                    <p class="text-sm text-gray-500">Selected File: {{ selectedFile.name }}</p>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-4">Supports PDF and DOCX files (max 5MB)</p>
+                <div class="text-center">
+                    <button (click)="uploadFile()" [disabled]="!selectedFile"
+                        class="mt-4 px-6 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50">
+                        Upload Resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
