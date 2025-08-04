@@ -16,12 +16,23 @@ export class FeedbackComponent {
   selectedFile: File | null = null;
   userEmail: string = '';
 
+  //api response to show
+  resumeScore: number | null = null;
+  scoreGrade: string = "";
+  atsCompatibility: number | null = null;
+  smartTips: string[] = [];
+
+  isLoading = false;
+  errorMessage = '';
+
+
   constructor(private http: HttpClient) { }
 
   onFileSelected(event: Event): void {
     const element = event.target as HTMLInputElement;
     if (element.files && element.files.length > 0) {
       this.selectedFile = element.files[0];
+      this.resetResults();
     }
   }
 
@@ -36,20 +47,39 @@ export class FeedbackComponent {
       return;
     }
 
+    this.isLoading = true;
+    this.errorMessage = '';
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
     formData.append('userEmail', this.userEmail);
 
-    this.http.post<any>(`${environment.apiBaseUrl}/resume/upload`, formData, { responseType: 'text' as 'json' }).subscribe({
+    this.http.post<any>(`http://localhost:9090/api/resume/upload`, formData).subscribe({
       next: (response) => {
-        console.log("File uploaded successfully", response);
-        alert("✅ File uploaded successfully" + response);
+        this.isLoading = false;
+        this.resumeScore = response.resume_score;
+        this.scoreGrade = response.score_grade;
+        this.atsCompatibility = response.ats_compatibility;
+        this.smartTips = response.smart_tips || [];
+        // console.log("File uploaded successfully", response);
+        // alert("✅ File uploaded successfully" + response);
       },
       error: (error) => {
-        console.log("File upload failed", error);
-        alert("File upload failed");
+        this.isLoading = false;
+        this.errorMessage = "File upload failed. Please try again.";
+        console.error("File upload failed", error);
+
+        // console.log("File upload failed", error);
+        // alert("File upload failed");
       }
     })
+  }
+  resetResults() {
+    this.resumeScore = null;
+    this.scoreGrade = '';
+    this.atsCompatibility = null;
+    this.smartTips = [];
+    this.errorMessage = '';
   }
 }
 
