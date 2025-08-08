@@ -25,6 +25,12 @@ export class FeedbackComponent {
   isLoading = false;
   errorMessage = '';
 
+  //ai assistence
+
+  isChatOpen = false;
+  userMessage = '';
+  messages: { role: string; content: string }[] = [];
+
 
   constructor(private http: HttpClient) { }
 
@@ -54,7 +60,7 @@ export class FeedbackComponent {
     formData.append('file', this.selectedFile);
     formData.append('userEmail', this.userEmail);
 
-    this.http.post<any>(`http://localhost:9090/api/resume/upload`, formData).subscribe({
+    this.http.post<any>(`${environment.apiBaseUrl}/resume/upload`, formData).subscribe({
       next: (response) => {
         this.isLoading = false;
         this.resumeScore = response.resume_score;
@@ -80,6 +86,28 @@ export class FeedbackComponent {
     this.atsCompatibility = null;
     this.smartTips = [];
     this.errorMessage = '';
+  }
+
+  //ai assistant logic
+  toggleChat(): void {
+    this.isChatOpen = !this.isChatOpen
+  }
+
+  sendMessage(): void {
+    if (!this.userMessage.trim()) return;
+
+    const message = this.userMessage.trim();
+    this.messages.push({ role: 'user', content: message });
+    this.userMessage = '';
+
+    this.http.post<any>('http://localhost:8000/api/v1/chat', { message }).subscribe({
+      next: (res) => {
+        this.messages.push({ role: 'assistant', content: res.response || 'No response' });
+      },
+      error: () => {
+        this.messages.push({ role: 'assistant', content: 'No response' });
+      }
+    })
   }
 }
 
