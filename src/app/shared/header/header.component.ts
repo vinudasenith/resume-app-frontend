@@ -1,13 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  isLoggedIn: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+
+  ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 
 }
