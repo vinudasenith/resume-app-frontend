@@ -8,6 +8,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { WorkFeatureComponent } from './pages/work-feature/work-feature.component';
 import { FeedbackComponent } from './pages/feedback/feedback.component';
 import { UserManagmentComponent } from './pages/user-managment/user-managment.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -28,6 +29,6 @@ export const routes: Routes = [
 
 
 
-    { path: 'admin', component: AdminComponent },
-    { path: 'admin/users', component: UserManagmentComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+    { path: 'admin/users', component: UserManagmentComponent, canActivate: [AdminGuard] },
 ];
