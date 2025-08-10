@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ToastrModule],
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
@@ -32,7 +33,13 @@ export class FeedbackComponent {
   messages: { role: string; content: string }[] = [];
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role')?.trim().toLowerCase();
+    return !!token
+  }
 
   onFileSelected(event: Event): void {
     const element = event.target as HTMLInputElement;
@@ -43,13 +50,22 @@ export class FeedbackComponent {
   }
 
   uploadFile(): void {
+
+    if (!this.isLoggedIn()) {
+      this.toastr.error(" Please login first");
+      return;
+    }
+
+
+
+
     if (!this.selectedFile) {
-      alert("Please select a file to upload.");
+      this.toastr.warning("Please select a file to upload.");
       return;
     }
 
     if (!this.userEmail) {
-      alert("Please enter your email.");
+      this.toastr.warning("Please enter your email.");
       return;
     }
 
