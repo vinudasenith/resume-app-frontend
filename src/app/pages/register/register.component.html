@@ -1,40 +1,45 @@
-<div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-0">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+<div
+    class="h-screen flex items-center justify-center px-4 sm:px-0 lg:px-8 bg-[url('https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center bg-no-repeat bg-gray-900 bg-blend-overlay bg-opacity-70 ">
+    <div class="w-full  max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="bg-purple-400 py-6 px-8 text-center">
-            <h1 class="text-2xl font-bold text-white">Create Your Account</h1>
-            <p class="mt-1 text-blue-100">Start matching with your dream jobs</p>
+            <h1 class="text-2xl font-bold text-white mb-2">Resume Matcher Pro</h1>
+            <h1 class="text-lg font-bold text-white">Create Your Account</h1>
+            <p class="mt-1 text-sm text-blue-100">Start matching with your dream jobs</p>
         </div>
 
         <!-- Form -->
-        <div class="p-8">
-            <form class="space-y-5" (ngSubmit)="handleRegister()" #registerForm="ngForm" novalidate>
+        <div class="p-6 ">
+            <form class="space-y-3" (ngSubmit)="handleRegister()" #registerForm="ngForm" novalidate>
                 <!-- First Name Field -->
-                <div>
-                    <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-                    <div class="mt-1">
+                <div class="grid grid-cols-2 gap-3">
+
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                         <input id="firstName" [(ngModel)]="firstName" name="firstName" type="text" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="John">
+                    </div>
+
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+
+                        <input id="lastName" [(ngModel)]="lastName" name="lastName" type="text" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            placeholder="Doe">
+
                     </div>
                 </div>
 
                 <!-- Last Name Field -->
-                <div>
-                    <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-                    <div class="mt-1">
-                        <input id="lastName" [(ngModel)]="lastName" name="lastName" type="text" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                            placeholder="Doe">
-                    </div>
-                </div>
+
 
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <div class="mt-1">
                         <input id="email" [(ngModel)]="email" name="email" type="email" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="you@example.com">
                     </div>
                 </div>
@@ -44,7 +49,7 @@
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <div class="mt-1">
                         <input id="username" [(ngModel)]="username" name="username" type="text" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="johndoe123">
                     </div>
                 </div>
@@ -54,7 +59,7 @@
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <div class="mt-1">
                         <input id="password" [(ngModel)]="password" name="password" type="password" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                             placeholder="••••••••">
                     </div>
                     <p class="mt-2 text-xs text-gray-500">Minimum 8 characters</p>
@@ -70,7 +75,7 @@
             </form>
 
             <!-- Divider -->
-            <div class="mt-6">
+            <div class="mt-4">
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
                         <div class="w-full border-t border-gray-300"></div>
@@ -82,9 +87,9 @@
             </div>
 
             <!-- Login Link -->
-            <div class="mt-6 text-center">
+            <div class="mt-4 text-center">
                 <a href="/login"
-                    class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                    class="inline-block w-full justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
                     Sign in to your account
                 </a>
             </div>
