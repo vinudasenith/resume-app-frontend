@@ -4,11 +4,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ToastrModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -20,7 +22,7 @@ export class RegisterComponent {
   username: string = '';
   error: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   handleRegister() {
     const data = {
@@ -36,12 +38,12 @@ export class RegisterComponent {
     this.http.post<any>(`${environment.apiBaseUrl}/users/register`, data).subscribe({
       next: (response) => {
         console.log("Registration successful", response);
-        alert("✅ Registration successful");
+        this.toastr.success("✅ Registration successful");
         this.router.navigate(['/login']);
       },
       error: (error) => {
         console.log("Registration failed", error);
-        alert("Registration failed");
+        this.toastr.error("Registration failed");
 
       }
 

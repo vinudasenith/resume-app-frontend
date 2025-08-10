@@ -6,11 +6,13 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule, ToastrModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -19,7 +21,8 @@ export class LoginComponent {
   password: string = '';
   error: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService, private toastr: ToastrService) { }
 
   handleLogin() {
     const data = {
@@ -38,7 +41,7 @@ export class LoginComponent {
 
         if (token) {
           this.authService.login(token);
-          alert("✅ Login successful");
+          this.toastr.success('✅ Login successful!', 'Success');
 
           const user = this.authService.getCurrentUser();
           console.log("Decoded User from JWT:", user);
