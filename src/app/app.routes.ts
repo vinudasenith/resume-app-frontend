@@ -9,8 +9,11 @@ import { WorkFeatureComponent } from './pages/work-feature/work-feature.componen
 import { FeedbackComponent } from './pages/feedback/feedback.component';
 import { UserManagmentComponent } from './pages/user-managment/user-managment.component';
 import { AdminGuard } from './guards/admin.guard';
+import { ResumeManagmentComponent } from './pages/resume-managment/resume-managment.component';
 
 export const routes: Routes = [
+
+    // Public routes
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '', component: HomeComponent },
@@ -28,7 +31,8 @@ export const routes: Routes = [
 
 
 
-
+    // Admin routes
     { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
     { path: 'admin/users', component: UserManagmentComponent, canActivate: [AdminGuard] },
+    { path: 'admin/resumes', component: ResumeManagmentComponent, canActivate: [AdminGuard] },
 ];
