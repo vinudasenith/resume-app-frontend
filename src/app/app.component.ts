@@ -11,6 +11,8 @@ import { HeaderComponent } from './shared/header/header.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+// Main app component
 export class AppComponent {
   title = 'resume-matcher-frontend';
   isLoginPage = false;
@@ -19,6 +21,7 @@ export class AppComponent {
   isAdminPage = false;
   isWorkFeaturePage = false;
   isUserManagmentPage = false;
+  isResumeManagmentPage = false;
 
 
 
@@ -37,6 +40,7 @@ export class AppComponent {
       this.isHome = path === '/';
       this.isAdminPage = path === '/admin';
       this.isUserManagmentPage = path === '/admin/users';
+      this.isResumeManagmentPage = path === '/admin/resumes';
     });
   }
 
