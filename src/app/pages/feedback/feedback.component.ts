@@ -12,22 +12,20 @@ import { ToastrService, ToastrModule } from 'ngx-toastr';
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
+
+//main component
 export class FeedbackComponent {
 
   selectedFile: File | null = null;
   userEmail: string = '';
 
   //api response to show
-  resumeScore: number | null = null;
-  scoreGrade: string = "";
   atsCompatibility: number | null = null;
-  smartTips: string[] = [];
 
   isLoading = false;
   errorMessage = '';
 
   //ai assistence
-
   isChatOpen = false;
   userMessage = '';
   messages: { role: string; content: string }[] = [];
@@ -35,12 +33,14 @@ export class FeedbackComponent {
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
+  // check if user is logged in
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role')?.trim().toLowerCase();
     return !!token
   }
 
+  // handle file selection
   onFileSelected(event: Event): void {
     const element = event.target as HTMLInputElement;
     if (element.files && element.files.length > 0) {
@@ -49,15 +49,13 @@ export class FeedbackComponent {
     }
   }
 
+  // upload file
   uploadFile(): void {
 
     if (!this.isLoggedIn()) {
       this.toastr.error(" Please login first");
       return;
     }
-
-
-
 
     if (!this.selectedFile) {
       this.toastr.warning("Please select a file to upload.");
@@ -71,6 +69,7 @@ export class FeedbackComponent {
 
     this.isLoading = true;
     this.errorMessage = '';
+    this.atsCompatibility = null;
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
@@ -79,28 +78,29 @@ export class FeedbackComponent {
     this.http.post<any>(`${environment.apiBaseUrl}/resume/upload`, formData).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.resumeScore = response.resume_score;
-        this.scoreGrade = response.score_grade;
-        this.atsCompatibility = response.ats_compatibility;
-        this.smartTips = response.smart_tips || [];
-        // console.log("File uploaded successfully", response);
-        // alert("✅ File uploaded successfully" + response);
+
+        if ('is_resume' in response) {
+          this.errorMessage = response.message;
+
+          if (response.is_resume) {
+            this.atsCompatibility = response.ats_compatibility;
+          } else {
+            this.atsCompatibility = null;
+          }
+        }
       },
+
       error: (error) => {
         this.isLoading = false;
         this.errorMessage = "File upload failed. Please try again.";
         console.error("File upload failed", error);
-
-        // console.log("File upload failed", error);
-        // alert("File upload failed");
       }
+
     })
   }
+
   resetResults() {
-    this.resumeScore = null;
-    this.scoreGrade = '';
     this.atsCompatibility = null;
-    this.smartTips = [];
     this.errorMessage = '';
   }
 
