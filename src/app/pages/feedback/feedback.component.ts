@@ -5,6 +5,11 @@ import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 
+interface FeedbackItem {
+  key: string;
+  value: string;
+}
+
 @Component({
   selector: 'app-feedback',
   standalone: true,
@@ -13,7 +18,6 @@ import { ToastrService, ToastrModule } from 'ngx-toastr';
   styleUrls: ['./feedback.component.css']
 })
 
-//main component
 export class FeedbackComponent {
 
   selectedFile: File | null = null;
@@ -21,6 +25,7 @@ export class FeedbackComponent {
 
   //api response to show
   atsCompatibility: number | null = null;
+  feedback: Record<string, string> | null = null;
 
   isLoading = false;
   errorMessage = '';
@@ -29,7 +34,6 @@ export class FeedbackComponent {
   isChatOpen = false;
   userMessage = '';
   messages: { role: string; content: string }[] = [];
-
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
@@ -70,6 +74,7 @@ export class FeedbackComponent {
     this.isLoading = true;
     this.errorMessage = '';
     this.atsCompatibility = null;
+    this.feedback = null;
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
@@ -77,16 +82,19 @@ export class FeedbackComponent {
 
     this.http.post<any>(`${environment.apiBaseUrl}/resume/upload`, formData).subscribe({
       next: (response) => {
+        console.log("Full response:", response);
+        console.log("Feedback object:", response.feedback);
+
         this.isLoading = false;
 
-        if ('is_resume' in response) {
+        if (response.is_resume) {
+          this.atsCompatibility = response.ats_compatibility;
+          this.feedback = response.feedback;
           this.errorMessage = response.message;
-
-          if (response.is_resume) {
-            this.atsCompatibility = response.ats_compatibility;
-          } else {
-            this.atsCompatibility = null;
-          }
+        } else {
+          this.atsCompatibility = null;
+          this.feedback = null;
+          this.errorMessage = response.message;
         }
       },
 
@@ -95,13 +103,22 @@ export class FeedbackComponent {
         this.errorMessage = "File upload failed. Please try again.";
         console.error("File upload failed", error);
       }
-
     })
   }
 
   resetResults() {
     this.atsCompatibility = null;
     this.errorMessage = '';
+    this.feedback = null;
+  }
+
+  getFeedbackItems(): FeedbackItem[] {
+    if (!this.feedback) return [];
+
+    return Object.entries(this.feedback).map(([key, value]) => ({
+      key,
+      value: value as string
+    }));
   }
 
   //ai assistant logic
@@ -126,5 +143,3 @@ export class FeedbackComponent {
     })
   }
 }
-
-
