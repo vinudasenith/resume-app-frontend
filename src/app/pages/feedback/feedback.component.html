@@ -44,28 +44,187 @@
                 </div>
             </div>
         </div>
-
-        <!-- Loading -->
-        <div *ngIf="isLoading" class="text-center text-purple-600 mt-4">
-            Processing your resume...
-        </div>
-
-        <!--Output Card-->
-        <div *ngIf="atsCompatibility !== null" class="mt-8 bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-xl font-bold text-black mb-4">Resume Analysis</h2>
-
-            <p class="text-black"><strong>ATS Compatibility:</strong> {{ atsCompatibility }}%</p>
-        </div>
-
-        <!-- Show message if not a resume or any backend message -->
-        <p *ngIf="errorMessage && atsCompatibility === null" class="text-red-600">
-            {{ errorMessage }}
-        </p>
     </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-12 px-6">
+        <div class="relative">
+            <!-- Animated spinner -->
+            <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+        </div>
+        <div class="mt-6 text-center">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Analyzing Your Resume</h3>
+            <p class="text-sm text-gray-600 max-w-md">
+                Our AI is processing your resume to check ATS compatibility and provide detailed feedback...
+            </p>
+        </div>
+        <!-- Progress dots animation -->
+        <div class="flex space-x-1 mt-4">
+            <div class="w-2 h-2 bg-indigo-600 rounded-full animate-bounce"></div>
+            <div class="w-2 h-2 bg-indigo-600 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-2 h-2 bg-indigo-600 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+        </div>
+    </div>
+
+    <!-- Results Card -->
+    <div *ngIf="atsCompatibility !== null" class="max-w-full mx-auto">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600  p-6">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/20  p-2">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Resume Analysis Results</h2>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white rounded-b-xl shadow-lg border border-gray-200">
+            <!-- ATS Score Section -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">ATS Compatibility Score</h3>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold mb-1" [class.text-emerald-600]="atsCompatibility >= 70"
+                            [class.text-amber-600]="atsCompatibility >= 40 && atsCompatibility < 70"
+                            [class.text-red-600]="atsCompatibility < 40">
+                            {{ atsCompatibility }}%
+                        </div>
+                        <div class="text-sm font-medium" [class.text-emerald-600]="atsCompatibility >= 70"
+                            [class.text-amber-600]="atsCompatibility >= 40 && atsCompatibility < 70"
+                            [class.text-red-600]="atsCompatibility < 40">
+                            <span *ngIf="atsCompatibility >= 70">Excellent</span>
+                            <span *ngIf="atsCompatibility >= 40 && atsCompatibility < 70">Needs Improvement</span>
+                            <span *ngIf="atsCompatibility < 40">Poor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                    <div class="h-3 rounded-full transition-all duration-500 ease-out"
+                        [class.bg-emerald-500]="atsCompatibility >= 70"
+                        [class.bg-amber-500]="atsCompatibility >= 40 && atsCompatibility < 70"
+                        [class.bg-red-500]="atsCompatibility < 40" [style.width.%]="atsCompatibility">
+                    </div>
+                </div>
+
+                <!-- Score Description -->
+                <p class="text-sm text-gray-600">
+                    <span *ngIf="atsCompatibility >= 70">
+                        Great job! Your resume is highly compatible with ATS systems and should pass through most
+                        automated screening processes.
+                    </span>
+                    <span *ngIf="atsCompatibility >= 40 && atsCompatibility < 70">
+                        Your resume has moderate ATS compatibility. Consider implementing the suggestions below to
+                        improve your score.
+                    </span>
+                    <span *ngIf="atsCompatibility < 40">
+                        Your resume may face challenges with ATS systems. Please review the feedback below to make
+                        necessary improvements.
+                    </span>
+                </p>
+            </div>
+
+            <!-- Detailed Feedback Section -->
+            <div *ngIf="feedback && getFeedbackItems().length > 0" class="p-6">
+                <div class="flex items-center mb-6">
+                    <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                        </path>
+                    </svg>
+                    <h3 class="text-lg font-semibold text-gray-900">Detailed Analysis</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div *ngFor="let item of getFeedbackItems()"
+                        class="flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 hover:shadow-sm"
+                        [class.bg-emerald-50]="item.value.startsWith('Success:')"
+                        [class.bg-red-50]="item.value.startsWith('Failure:')" [class.border-l-4]="true"
+                        [class.border-emerald-400]="item.value.startsWith('Success:')"
+                        [class.border-red-400]="item.value.startsWith('Failure:')">
+
+                        <!-- Status Icon -->
+                        <div class="flex-shrink-0 mt-0.5">
+                            <div *ngIf="item.value.startsWith('Success:')"
+                                class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div *ngIf="item.value.startsWith('Failure:')"
+                                class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Content -->
+                        <div class="flex-grow min-w-0">
+                            <h4 class="text-sm font-semibold capitalize mb-1"
+                                [class.text-emerald-800]="item.value.startsWith('Success:')"
+                                [class.text-red-800]="item.value.startsWith('Failure:')">
+                                {{ item.key }}
+                            </h4>
+                            <p class="text-sm" [class.text-emerald-700]="item.value.startsWith('Success:')"
+                                [class.text-red-700]="item.value.startsWith('Failure:')">
+                                {{ item.value.replace('Success:', '').replace('Failure:', '') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="px-6 py-4 bg-gray-50 rounded-b-xl border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center">
+                    <p class="text-xs text-gray-500">
+                        Accuracy may vary depending on ATS systems
+                    </p>
+                    <div class="flex gap-2">
+                        <button
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                            Download Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div *ngIf="errorMessage && atsCompatibility === null" class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-8 text-center">
+            <div class="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z">
+                    </path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Analysis Not Available</h3>
+            <p class="text-gray-600 mb-6">{{ errorMessage }}</p>
+            <button
+                class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                Try Again
+            </button>
+        </div>
+    </div>
+
 </div>
 
 <!-- Chat Button -->
-<div class="fixed bottom-6 right-6 z-50">
+<div class="fixed bottom-2 right-3 z-50">
     <button (click)="toggleChat()" class="bg-purple-600 text-black p-4 rounded-full shadow-lg hover:bg-purple-700">
         💬
     </button>
