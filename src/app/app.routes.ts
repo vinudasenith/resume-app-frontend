@@ -10,6 +10,7 @@ import { FeedbackComponent } from './pages/feedback/feedback.component';
 import { UserManagmentComponent } from './pages/user-managment/user-managment.component';
 import { AdminGuard } from './guards/admin.guard';
 import { ResumeManagmentComponent } from './pages/resume-managment/resume-managment.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 'feature', component: FeatureComponent },
     { path: 'work', component: WorkFeatureComponent },
     { path: 'feedback', component: FeedbackComponent },
+    { path: 'uprofile', component: UserProfileComponent },
 
 
 
