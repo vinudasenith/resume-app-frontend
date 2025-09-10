@@ -6,13 +6,12 @@ import { environment } from '../../../environments/environment';
 interface Resume {
   id: number;
   fileName: string;
+  atsCompatibility?: number;
   user: {
     name: string;
     email: string;
   }
 }
-
-
 @Component({
   selector: 'app-resume-managment',
   standalone: true,
