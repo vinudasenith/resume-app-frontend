@@ -14,6 +14,7 @@
                     <tr>
                         <th class="py-3 px-4 text-left">Email</th>
                         <th class="py-3 px-4 text-left">Resume</th>
+                        <th class="py-3 px-4 text-left">ATS Score</th>
                         <th class="py-3 px-4 text-left">Actions</th>
                     </tr>
                 </thead>
@@ -22,13 +23,17 @@
                         <td class="py-2 px-4">{{ resume.user.email }}</td>
                         <td class="py-2 px-4">{{ resume.fileName }}</td>
                         <td class="py-2 px-4">
+                            <span [class.text-emerald-600]="(resume.atsCompatibility ?? 0) >= 70"
+                                [class.text-amber-600]="(resume.atsCompatibility ?? 0) >= 40 && (resume.atsCompatibility ?? 0) < 70"
+                                [class.text-red-600]="(resume.atsCompatibility ?? 0) < 40">
+                                {{ resume.atsCompatibility !== undefined ? resume.atsCompatibility + '%' : 'N/A' }}
+                            </span>
+                        </td>
+                        <td class="py-2 px-4">
                             <a [href]="uploadsBaseUrl + '/' + resume.fileName" target="_blank"
                                 class="text-blue-600 hover:underline font-medium">
                                 View
                             </a>
-
-
-
                         </td>
                     </tr>
                 </tbody>
