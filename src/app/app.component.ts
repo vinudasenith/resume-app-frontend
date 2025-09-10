@@ -22,6 +22,7 @@ export class AppComponent {
   isWorkFeaturePage = false;
   isUserManagmentPage = false;
   isResumeManagmentPage = false;
+  isUserProfilPage = false;
 
 
 
@@ -37,6 +38,8 @@ export class AppComponent {
       const path = event.urlAfterRedirects;
       this.isLoginPage = path === '/login';
       this.isRegisterPage = path === '/register';
+      this.isUserProfilPage = path === '/uprofile';
+
       this.isHome = path === '/';
       this.isAdminPage = path === '/admin';
       this.isUserManagmentPage = path === '/admin/users';
