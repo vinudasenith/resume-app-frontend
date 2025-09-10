@@ -1,14 +1,71 @@
-<div class="min-h-screen bg-gray-100">
-
-    <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 w-64 bg-purple-800 text-white">
-        <div class="p-4 border-b border-purple-700">
-            <h1 class="text-xl font-bold">Admin Dashboard</h1>
+<div class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center items-center">
+            <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
         </div>
-        <nav class="p-4 space-y-2 ">
-            <a href="/admin" class="block py-2 px-4 bg-purple-700 rounded-md">Dashboard</a>
-            <a href="/admin/users" class="block py-2 px-4 bg-purple-700 rounded-md mt-10">User Management</a>
-            <a href="/admin/resumes" class="block py-2 px-4 bg-purple-700 rounded-md">Resume Management</a>
-        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-grow p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Welcome Panel -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <h2 class="text-lg font-medium text-gray-900">Welcome, Administrator</h2>
+                <p class="text-gray-600 mt-1">Here's an overview of your platform management options.</p>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- User Management Card -->
+                <a href="/admin/users"
+                    class="bg-white border border-gray-200 shadow-md rounded-xl p-6 hover:shadow-lg transition-all duration-200 hover:border-indigo-100">
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-lg bg-indigo-50 flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">User Management</h2>
+                    </div>
+                    <p class="text-gray-600 text-sm">View and manage all registered users, permissions, and access
+                        levels.</p>
+                </a>
+
+                <!-- Resume Management Card -->
+                <a href="/admin/resumes"
+                    class="bg-white border border-gray-200 shadow-md rounded-xl p-6 hover:shadow-lg transition-all duration-200 hover:border-indigo-100">
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-lg bg-indigo-50 flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Resume Management</h2>
+                    </div>
+                    <p class="text-gray-600 text-sm">Review, analyze, and manage all submitted resumes and applications.
+                    </p>
+                </a>
+
+                <a href="/"
+                    class="bg-white border border-gray-200 shadow-md rounded-xl p-6 hover:shadow-lg transition-all duration-200 hover:border-green-100">
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-lg bg-green-50 flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h18v18H3V3z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Customer Dashboard</h2>
+                    </div>
+                    <p class="text-gray-600 text-sm">Return to the customer view to see platform as a user.</p>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
