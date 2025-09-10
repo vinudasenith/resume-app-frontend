@@ -14,6 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+// register component
 export class RegisterComponent {
   firstName: string = '';
   lastName: string = '';
@@ -22,8 +24,10 @@ export class RegisterComponent {
   username: string = '';
   error: string = '';
 
+  //constructor
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
+  // handle register
   handleRegister() {
     const data = {
       firstName: this.firstName,
@@ -35,6 +39,7 @@ export class RegisterComponent {
       enabled: true
     };
 
+    // call register api
     this.http.post<any>(`${environment.apiBaseUrl}/users/register`, data).subscribe({
       next: (response) => {
         console.log("Registration successful", response);

@@ -11,12 +11,14 @@ import { environment } from '../../../environments/environment';
   templateUrl: './user-managment.component.html',
   styleUrls: ['./user-managment.component.css']
 })
+
+//user managment
 export class UserManagmentComponent implements OnInit {
 
   users: any[] = [];
   loading: boolean = true;
 
-
+  //constructor
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

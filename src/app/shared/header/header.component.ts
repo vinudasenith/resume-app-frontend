@@ -12,10 +12,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
+// Header component
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isMobileMenuOpen = false;
 
+  // Constructor
   constructor(public authService: AuthService, private router: Router) { }
 
 
@@ -25,15 +28,18 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // Function to handle logout
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
+  // Function to toggle mobile menu
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
+  // Function to close mobile menu
   closeMobileMenu() {
     this.isMobileMenuOpen = false;
   }

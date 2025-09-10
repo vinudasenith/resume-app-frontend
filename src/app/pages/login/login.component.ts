@@ -16,14 +16,18 @@ import { ToastrModule } from 'ngx-toastr';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+// login component
 export class LoginComponent {
   email: string = '';
   password: string = '';
   error: string = '';
 
 
+  //constructor
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private toastr: ToastrService) { }
 
+  // handle login
   handleLogin() {
     const data = {
       email: this.email,
@@ -36,13 +40,14 @@ export class LoginComponent {
 
         const token = response.token;
 
-
         console.log("Token:", token);
 
+        // Save token to local storage
         if (token) {
           this.authService.login(token);
           this.toastr.success('✅ Login successful!', 'Success');
 
+          // Navigate to admin or user dashboard
           const user = this.authService.getCurrentUser();
           console.log("Decoded User from JWT:", user);
           if (user?.role === 'admin') {
@@ -51,13 +56,13 @@ export class LoginComponent {
             this.router.navigate(['/']).catch((err) => console.error('Navigation failed', err));
           }
         } else {
-          alert("Login failed");
+          this.toastr.error('Login failed');
         }
 
       },
       error: (error) => {
         console.log("Login failed", error);
-        alert("Login failed");
+        this.toastr.error('Login failed');
       }
     })
   }
