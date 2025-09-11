@@ -17,6 +17,10 @@ export class UserProfileComponent implements OnInit {
   loading: boolean = true;
   activeTab: string = 'profile';
 
+  // store feedback message
+  notifications: any[] = [];
+  loadingNotifications = false;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -37,6 +41,8 @@ export class UserProfileComponent implements OnInit {
       next: (res: any) => {
         this.userData = res;
         this.loading = false;
+
+        this.fetchNotifications();
       },
       error: (err) => {
         console.error('Failed to fetch user', err);
@@ -47,5 +53,33 @@ export class UserProfileComponent implements OnInit {
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
+
+    if (tab === 'notifications') {
+      this.fetchNotifications();
+    }
   }
+
+  // fetch notifications
+  fetchNotifications() {
+    if (!this.userData?.email) return;
+
+    this.loadingNotifications = true;
+    this.http.get<any[]>(`${environment.apiBaseUrl}/feedback/my-feedback`, {
+      params: { email: this.userData.email }
+    }).subscribe({
+      next: (res) => {
+        // convert createdAt to Date objects
+        this.notifications = res.map(note => ({
+          ...note,
+          createdAt: new Date(note.createdAt)
+        }));
+        this.loadingNotifications = false;
+      },
+      error: (err) => {
+        console.error('Failed to fetch notifications', err);
+        this.loadingNotifications = false;
+      }
+    });
+  }
+
 }
