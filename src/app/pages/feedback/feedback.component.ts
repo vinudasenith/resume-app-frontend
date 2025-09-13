@@ -4,6 +4,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
+import jsPDF from 'jspdf';
+import autoTable from "jspdf-autotable";
 
 interface FeedbackItem {
   key: string;
@@ -106,12 +108,14 @@ export class FeedbackComponent {
     })
   }
 
+  // reset results
   resetResults() {
     this.atsCompatibility = null;
     this.errorMessage = '';
     this.feedback = null;
   }
 
+  // get feedback items
   getFeedbackItems(): FeedbackItem[] {
     if (!this.feedback) return [];
 
@@ -126,6 +130,7 @@ export class FeedbackComponent {
     this.isChatOpen = !this.isChatOpen
   }
 
+  // send message
   sendMessage(): void {
     if (!this.userMessage.trim()) return;
 
@@ -141,5 +146,37 @@ export class FeedbackComponent {
         this.messages.push({ role: 'assistant', content: 'No response' });
       }
     })
+  }
+
+  // download report
+  downloadReport(): void {
+    if (!this.atsCompatibility || !this.feedback) {
+      this.toastr.warning("No report to download.");
+      return;
+    }
+
+    const doc = new jsPDF();
+
+    // Header
+    doc.setFontSize(16);
+    doc.text("Resume Analysis Report", 10, 10);
+
+    doc.setFontSize(12);
+    doc.text(`Email: ${this.userEmail}`, 10, 20);
+    doc.text(`ATS Compatibility: ${this.atsCompatibility}%`, 10, 30);
+
+    // Feedback Table
+    const feedbackData = Object.entries(this.feedback).map(([key, value]) => [key, value]);
+
+    autoTable(doc, {
+      head: [["Criteria", "Feedback"]],
+      body: feedbackData,
+      startY: 40,
+      theme: "grid",
+      headStyles: { fillColor: [63, 81, 181] },
+      styles: { fontSize: 10, cellPadding: 4 },
+    });
+
+    doc.save("resume-analysis-report.pdf");
   }
 }
