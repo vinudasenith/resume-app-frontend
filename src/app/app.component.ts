@@ -23,6 +23,8 @@ export class AppComponent {
   isUserManagmentPage = false;
   isResumeManagmentPage = false;
   isUserProfilPage = false;
+  isAdminProfilPage = false;
+  isErrorPage = false;
 
 
 
@@ -44,6 +46,16 @@ export class AppComponent {
       this.isAdminPage = path === '/admin';
       this.isUserManagmentPage = path === '/admin/users';
       this.isResumeManagmentPage = path === '/admin/resumes';
+      this.isAdminProfilPage = path === '/admin/profile';
+
+      const validRoutes = [
+        '/', '/login', '/register', '/contact', '/feature', '/work', '/feedback',
+        '/uprofile', '/admin', '/admin/users', '/admin/resumes', '/admin/profile'
+      ];
+      this.isErrorPage = !validRoutes.includes(path);
+
+
+
     });
   }
 
