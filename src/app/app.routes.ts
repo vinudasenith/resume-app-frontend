@@ -11,6 +11,8 @@ import { UserManagmentComponent } from './pages/user-managment/user-managment.co
 import { AdminGuard } from './guards/admin.guard';
 import { ResumeManagmentComponent } from './pages/resume-managment/resume-managment.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 export const routes: Routes = [
 
@@ -33,8 +35,14 @@ export const routes: Routes = [
 
 
 
+
     // Admin routes
     { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
     { path: 'admin/users', component: UserManagmentComponent, canActivate: [AdminGuard] },
     { path: 'admin/resumes', component: ResumeManagmentComponent, canActivate: [AdminGuard] },
+    { path: 'admin/profile', component: AdminProfileComponent, canActivate: [AdminGuard] },
+
+    //wild card route
+    { path: '**', component: ErrorComponent },
+
 ];
