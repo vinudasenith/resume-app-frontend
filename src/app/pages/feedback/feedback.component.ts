@@ -138,7 +138,7 @@ export class FeedbackComponent {
     this.messages.push({ role: 'user', content: message });
     this.userMessage = '';
 
-    this.http.post<any>('http://localhost:8000/api/v1/chat', { message }).subscribe({
+    this.http.post<any>('http://localhost:8001/api/v1/chat', { message }).subscribe({
       next: (res) => {
         this.messages.push({ role: 'assistant', content: res.response || 'No response' });
       },
