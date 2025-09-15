@@ -225,7 +225,8 @@
 
 <!-- Chat Button -->
 <div class="fixed bottom-2 right-3 z-50">
-    <button (click)="toggleChat()" class="bg-purple-600 text-black p-4 rounded-full shadow-lg hover:bg-purple-700">
+    <button (click)="toggleChat()"
+        class="bg-gradient-to-r from-indigo-600 to-pink-500 text-black p-4 rounded-full shadow-lg hover:bg-purple-700">
         💬
     </button>
 </div>
@@ -233,7 +234,8 @@
 <!--chat popUp-->
 <div class="fixed bottom-0 left-0 sm:bottom-20  sm:right-6 sm:left-auto sm:w-[500px] h-[70vh] bg-white border border-gray-300 rounded-t-lg shadow-lg flex flex-col z-50 mb-2 ml-2"
     *ngIf="isChatOpen">
-    <div class="bg-purple-600 text-black px-3 py-2 sm:px-4 sm:py-2 rounded-t-lg flex justify-between items-center">
+    <div
+        class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-t-lg flex justify-between items-center">
         <span>🤖 AI Assistant</span>
         <button (click)="toggleChat()">✖</button>
     </div>
