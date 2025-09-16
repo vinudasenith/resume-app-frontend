@@ -46,6 +46,7 @@ export class FeedbackComponent {
     return !!token
   }
 
+
   // handle file selection
   onFileSelected(event: Event): void {
     const element = event.target as HTMLInputElement;
@@ -54,6 +55,7 @@ export class FeedbackComponent {
       this.resetResults();
     }
   }
+
 
   // upload file
   uploadFile(): void {
@@ -108,12 +110,14 @@ export class FeedbackComponent {
     })
   }
 
+
   // reset results
   resetResults() {
     this.atsCompatibility = null;
     this.errorMessage = '';
     this.feedback = null;
   }
+
 
   // get feedback items
   getFeedbackItems(): FeedbackItem[] {
@@ -125,10 +129,12 @@ export class FeedbackComponent {
     }));
   }
 
+
   //ai assistant logic
   toggleChat(): void {
     this.isChatOpen = !this.isChatOpen
   }
+
 
   // send message
   sendMessage(): void {
@@ -147,6 +153,7 @@ export class FeedbackComponent {
       }
     })
   }
+
 
   // download report
   downloadReport(): void {

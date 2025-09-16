@@ -27,15 +27,6 @@ export const routes: Routes = [
     { path: 'uprofile', component: UserProfileComponent },
 
 
-
-
-
-
-
-
-
-
-
     // Admin routes
     { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
     { path: 'admin/users', component: UserManagmentComponent, canActivate: [AdminGuard] },

@@ -1,15 +1,20 @@
 <div
     class="min-h-screen flex items-center justify-center px-4 sm:px-0 lg:px-8 bg-[url('https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center bg-no-repeat bg-gray-900 bg-blend-overlay bg-opacity-70">
     <div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+
+
         <!-- Header -->
         <div class="bg-gradient-to-r from-indigo-600 to-pink-500 py-6 px-8 text-center">
             <h1 class="text-2xl font-bold text-white">Resume Matcher Pro</h1>
             <p class="mt-1 text-blue-100">Find your perfect job match</p>
         </div>
 
+
         <!-- Form -->
         <div class="p-8">
             <form class="space-y-6" (ngSubmit)="handleLogin()" #loginForm="ngForm" novalidate>
+
+
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-black">Email address</label>
@@ -19,6 +24,7 @@
                             placeholder="you@example.com ">
                     </div>
                 </div>
+
 
                 <!-- Password Field -->
                 <div>
@@ -33,6 +39,7 @@
                     </div>
                 </div>
 
+
                 <!-- Submit Button -->
                 <div>
                     <button type="submit"
@@ -41,6 +48,7 @@
                     </button>
                 </div>
             </form>
+
 
             <!-- Sign Up Link -->
             <div class="mt-6 text-center text-sm">

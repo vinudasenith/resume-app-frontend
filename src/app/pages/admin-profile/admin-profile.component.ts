@@ -11,21 +11,28 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './admin-profile.component.html',
   styleUrls: ['./admin-profile.component.css']
 })
+
+
 export class AdminProfileComponent implements OnInit {
 
+  // store logged in user
   userData: any = null;
   loading: boolean = true;
   activeTab: string = 'profile';
+
 
   // store feedback message
   notifications: any[] = [];
   loadingNotifications = false;
 
+
   constructor(private http: HttpClient) { }
+
 
   ngOnInit(): void {
     this.fetchLoggedInUser();
   }
+
 
   // fetch logged in user
   fetchLoggedInUser() {
@@ -34,6 +41,7 @@ export class AdminProfileComponent implements OnInit {
       this.loading = false;
       return;
     }
+
 
     this.http.get(`${environment.apiBaseUrl}/users/me`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -51,6 +59,7 @@ export class AdminProfileComponent implements OnInit {
     });
   }
 
+
   setActiveTab(tab: string) {
     this.activeTab = tab;
 
@@ -58,6 +67,7 @@ export class AdminProfileComponent implements OnInit {
       this.fetchNotifications();
     }
   }
+
 
   // fetch notifications
   fetchNotifications() {

@@ -45,7 +45,7 @@ export class LoginComponent {
         // Save token to local storage
         if (token) {
           this.authService.login(token);
-          this.toastr.success('✅ Login successful!', 'Success');
+          this.toastr.success(' Login successful!', 'Success');
 
           // Navigate to admin or user dashboard
           const user = this.authService.getCurrentUser();

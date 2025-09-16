@@ -1,6 +1,8 @@
 <div
     class="h-screen flex items-center justify-center px-4 sm:px-0 lg:px-8 bg-[url('https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center bg-no-repeat bg-gray-900 bg-blend-overlay bg-opacity-70 ">
     <div class="w-full  max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+
+
         <!-- Header -->
         <div class="bg-gradient-to-r from-indigo-600 to-pink-500 py-6 px-8 text-center">
             <h1 class="text-2xl font-bold text-white mb-2">Resume Matcher Pro</h1>
@@ -11,9 +13,12 @@
         <!-- Form -->
         <div class="p-6 ">
             <form class="space-y-3" (ngSubmit)="handleRegister()" #registerForm="ngForm" novalidate>
-                <!-- First Name Field -->
+
+
+
                 <div class="grid grid-cols-2 gap-3">
 
+                    <!-- First Name Field -->
                     <div>
                         <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                         <input id="firstName" [(ngModel)]="firstName" name="firstName" type="text" required
@@ -21,6 +26,8 @@
                             placeholder="John">
                     </div>
 
+
+                    <!-- Last Name Field -->
                     <div>
                         <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
 
@@ -31,7 +38,6 @@
                     </div>
                 </div>
 
-                <!-- Last Name Field -->
 
 
                 <!-- Email Field -->
@@ -44,6 +50,7 @@
                     </div>
                 </div>
 
+
                 <!-- Username Field -->
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
@@ -53,6 +60,7 @@
                             placeholder="johndoe123">
                     </div>
                 </div>
+
 
                 <!-- Password Field -->
                 <div>
@@ -65,6 +73,7 @@
                     <p class="mt-2 text-xs text-gray-500">Minimum 8 characters</p>
                 </div>
 
+
                 <!-- Submit Button -->
                 <div>
                     <button type="submit"
@@ -73,6 +82,7 @@
                     </button>
                 </div>
             </form>
+
 
             <!-- Divider -->
             <div class="mt-4">
@@ -85,6 +95,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Login Link -->
             <div class="mt-4 text-center">

@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './work-feature.component.html',
   styleUrl: './work-feature.component.css'
 })
+
 export class WorkFeatureComponent {
 
 }

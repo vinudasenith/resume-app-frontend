@@ -101,6 +101,7 @@ export class ResumeManagmentComponent implements OnInit {
     this.feedbackText = "";
   }
 
+  // Send feedback
   sendFeedback() {
     if (!this.selectedResume) return;
 

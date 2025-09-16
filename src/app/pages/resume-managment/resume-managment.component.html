@@ -1,11 +1,13 @@
 <div class="min-h-screen bg-gray-100 p-8">
     <div class="max-w-8xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+
         <!-- Title -->
         <h1 class="text-2xl font-bold text-black mb-6">Resume Management</h1>
 
         <!-- Loading & Error -->
         <div *ngIf="loading" class="text-gray-600">Loading resumes...</div>
         <div *ngIf="error" class="text-red-600">{{ error }}</div>
+
 
         <!-- Table -->
         <div *ngIf="!loading && resumes.length > 0" class="overflow-x-auto">
@@ -45,12 +47,14 @@
             </table>
         </div>
 
+
         <!-- No Data -->
         <div *ngIf="!loading && resumes.length === 0" class="text-gray-600">
             No resumes found.
         </div>
     </div>
 </div>
+
 
 <!-- Feedback Modal -->
 <div *ngIf="showFeedbackModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

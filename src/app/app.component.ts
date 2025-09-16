@@ -48,6 +48,7 @@ export class AppComponent {
       this.isResumeManagmentPage = path === '/admin/resumes';
       this.isAdminProfilPage = path === '/admin/profile';
 
+
       const validRoutes = [
         '/', '/login', '/register', '/contact', '/feature', '/work', '/feedback',
         '/uprofile', '/admin', '/admin/users', '/admin/resumes', '/admin/profile'
