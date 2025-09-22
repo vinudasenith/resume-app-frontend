@@ -5,13 +5,33 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
 
-                <!-- Hamburger Menu Button -->
                 <div class="flex items-center">
-                    <span
-                        class=" text-xl  font-bold bg-gradient-to-r from-indigo-600 to-pink-500 text-transparent bg-clip-text ">
-                        Resume Matcher Pro
-                    </span>
+                    <a [routerLink]="['/']" class="flex items-center space-x-2">
+
+                        <!-- Logo Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-8 h-8 text-indigo-600">
+
+                            <!-- Document -->
+                            <rect x="3" y="2" width="14" height="20" rx="2" ry="2" />
+                            <line x1="9" y1="8" x2="15" y2="8" />
+                            <line x1="9" y1="12" x2="15" y2="12" />
+                            <line x1="9" y1="16" x2="13" y2="16" />
+
+                            <!-- Magnifier -->
+                            <circle cx="18" cy="18" r="3" />
+                            <line x1="21" y1="21" x2="20" y2="20" />
+                        </svg>
+
+                        <!-- Logo Text -->
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 text-transparent bg-clip-text">
+                            Resume Matcher Pro
+                        </span>
+                    </a>
                 </div>
+
                 <div class="hidden md:flex items-center space-x-8">
                     <a [routerLink]='["/"]' class="text-gray-700 hover:text-purple-600 ">Home</a>
                     <a [routerLink]='["/feature"]' class="text-gray-700 hover:text-purple-600">Features</a>
@@ -82,9 +102,27 @@
 
     <!-- Drawer Header -->
     <div class="p-4 flex justify-between items-center border-b border-gray-200">
-        <h2 class="text-xl font-extrabold  bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent 
-             hover:bg-purple-100 hover:text-purple-700 select-none">
-            Resume Matcher Pro</h2>
+
+        <!-- Logo with Icon -->
+        <a [routerLink]="['/']" (click)="toggleMobileMenu()" class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-indigo-600">
+
+                <!-- Document -->
+                <rect x="3" y="2" width="14" height="20" rx="2" ry="2" />
+                <line x1="9" y1="8" x2="15" y2="8" />
+                <line x1="9" y1="12" x2="15" y2="12" />
+                <line x1="9" y1="16" x2="13" y2="16" />
+
+                <!-- Magnifier -->
+                <circle cx="18" cy="18" r="3" />
+                <line x1="21" y1="21" x2="20" y2="20" />
+            </svg>
+            <span class="text-lg font-bold bg-gradient-to-r from-indigo-600 to-pink-500 text-transparent bg-clip-text">
+                Resume Matcher Pro
+            </span>
+        </a>
+
         <button (click)="toggleMobileMenu()"
             class="text-gray-600 text-3xl hover:text-purple-600 transition-colors duration-200"
             aria-label="Close menu">&times;</button>
